@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block title %}{{ category_name }} — CipherSense{% endblock %}
+
+{% block content %}
+<div class="category-page">
+    <div class="category-header">
+        <a href="/" class="back-link">← All articles</a>
+        <h1 class="category-title">
+            <span class="title-accent">//</span> {{ category_name }}
+        </h1>
+        <p class="category-desc">{{ posts|length }} article{{ 's' if posts|length != 1 }} on {{ category_name }}</p>
+    </div>
+
+    {% if posts %}
+    <div class="articles-grid">
+        {% for post in posts %}
+        <article class="article-card">
+            <div class="card-tag" style="border-color: {{ post.tag_color }}; color: {{ post.tag_color }}">
+                {{ post.category }}
+            </div>
+            <div class="card-icon">{{ post.hero_icon }}</div>
+            <h3 class="card-title">{{ post.title }}</h3>
+            <p class="card-excerpt">{{ post.excerpt }}</p>
+            <div class="card-footer">
+                <div class="card-meta">
+                    <span>{{ post.date }}</span>
+                    <span class="meta-dot">•</span>
+                    <span>{{ post.read_time }}</span>
+                </div>
+                <a href="/post/{{ post.slug }}" class="card-link">Read <span>→</span></a>
+            </div>
+        </article>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="empty-state">
+        <span>🔍</span>
+        <p>No articles found in this category yet.</p>
+        <a href="/" class="btn-primary"><span>Back to Home</span><span>→</span></a>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
