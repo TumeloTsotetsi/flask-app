@@ -1,0 +1,53 @@
+{% extends "admin/base.html" %}
+{% block title %}Settings{% endblock %}
+{% block topbar_title %}Settings{% endblock %}
+
+{% block content %}
+<div class="form-card" style="max-width:520px;">
+    <h2 class="form-section-title">🔒 Change Password</h2>
+    <p style="color:var(--text-muted);font-size:0.88rem;margin-bottom:1.5rem;">
+        Logged in as <strong>{{ username }}</strong>. Use a strong password — at least 8 characters.
+    </p>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% for cat, msg in messages %}
+        <div class="flash flash-{{ cat }}">{{ msg }}</div>
+        {% endfor %}
+    {% endwith %}
+
+    <form method="POST" action="/admin/settings">
+        <div class="form-row">
+            <label>Current Password</label>
+            <input type="password" name="current_password" required placeholder="Your current password">
+        </div>
+        <div class="form-row">
+            <label>New Password</label>
+            <input type="password" name="new_password" required placeholder="At least 8 characters" minlength="8">
+        </div>
+        <div class="form-row">
+            <label>Confirm New Password</label>
+            <input type="password" name="confirm_password" required placeholder="Repeat new password">
+        </div>
+        <button type="submit" class="btn-save">Update Password 🌸</button>
+    </form>
+</div>
+
+<div class="form-card" style="max-width:520px;margin-top:2rem;">
+    <h2 class="form-section-title">🚀 VPS Deployment</h2>
+    <p style="color:var(--text-muted);font-size:0.88rem;margin-bottom:1rem;">Run these commands on your VPS to deploy CyberDiary:</p>
+    <div class="code-block">
+        <div class="code-line"><span class="code-comment"># Install dependencies</span></div>
+        <div class="code-line">pip install flask gunicorn</div>
+        <div class="code-line">&nbsp;</div>
+        <div class="code-line"><span class="code-comment"># Set a strong secret key</span></div>
+        <div class="code-line">export SECRET_KEY="your-very-long-random-secret"</div>
+        <div class="code-line">&nbsp;</div>
+        <div class="code-line"><span class="code-comment"># Run with gunicorn (production)</span></div>
+        <div class="code-line">gunicorn -w 4 -b 0.0.0.0:8000 app:app</div>
+    </div>
+    <p style="color:var(--text-muted);font-size:0.82rem;margin-top:1rem;">
+        💡 Use <strong>nginx</strong> as a reverse proxy on port 80/443 pointing to port 8000.
+        The database file <code>cyberdiary.db</code> lives in the same folder as <code>app.py</code>.
+    </p>
+</div>
+{% endblock %}

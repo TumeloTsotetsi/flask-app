@@ -1,0 +1,31 @@
+{% extends "admin/base.html" %}
+{% block title %}Orders{% endblock %}
+{% block topbar_title %}Orders{% endblock %}
+{% block content %}
+<div class="page-header"><h1>All Orders</h1></div>
+<div class="admin-card">
+{% if orders %}
+<table class="admin-table">
+    <thead>
+        <tr><th>#</th><th>Customer</th><th>Email</th><th>Total</th><th>Shipping</th><th>Status</th><th>Date</th><th></th></tr>
+    </thead>
+    <tbody>
+    {% for o in orders %}
+    <tr>
+        <td><strong>#{{ o['id'] }}</strong></td>
+        <td>{{ o['customer_name'] }}</td>
+        <td style="font-size:0.78rem;color:#b07a95;">{{ o['customer_email'] }}</td>
+        <td><strong>${{ "%.2f"|format(o['total']) }}</strong></td>
+        <td style="font-size:0.78rem;">{% if o['shipping'] == 0 %}<span style="color:#2ecc71;font-weight:700;">FREE</span>{% else %}${{ "%.2f"|format(o['shipping']) }}{% endif %}</td>
+        <td><span class="badge badge-{{ o['status'] }}">{{ o['status'] }}</span></td>
+        <td style="color:#b07a95;font-size:0.78rem;">{{ o['created_at'][:10] }}</td>
+        <td><a href="/admin/orders/{{ o['id'] }}" class="btn btn-outline btn-sm">View</a></td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<p style="color:#b07a95;font-style:italic;text-align:center;padding:2rem;">No orders yet! 🌸</p>
+{% endif %}
+</div>
+{% endblock %}
