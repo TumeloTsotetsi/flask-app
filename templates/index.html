@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+{% block content %}
+
+<!-- Hero -->
+<section class="hero-section">
+    <div class="hero-content">
+        <div class="hero-label">✨ Featured entry</div>
+        <h1 class="hero-title">{{ featured.title }}</h1>
+        <p class="hero-excerpt">{{ featured.excerpt }}</p>
+        <div class="hero-meta">
+            <span class="meta-heart">♡</span>
+            <span>{{ featured.date }}</span>
+            <span>·</span>
+            <span>{{ featured.read_time }}</span>
+        </div>
+        <a href="/post/{{ featured.slug }}" class="btn-primary">
+            Read this entry 🌸
+        </a>
+    </div>
+
+    <div class="hero-diary">
+        <div class="diary-spine"></div>
+        <div class="diary-rings">
+            <div class="ring"></div>
+            <div class="ring"></div>
+            <div class="ring"></div>
+            <div class="ring"></div>
+        </div>
+        <div class="diary-sticker">🔒</div>
+        <div class="diary-content">
+            <div class="diary-date">Dear Diary, {{ featured.date }}...</div>
+            <div class="diary-entry">
+                <p>Today I learned something really important about staying safe online.</p>
+                <p>It's actually not as scary as it sounds — once you understand how things work, you feel so much more in control!</p>
+                <p>I want to share everything I've discovered so my friends can feel safe too.</p>
+            </div>
+            <div class="diary-sign">— with love 🌸</div>
+        </div>
+    </div>
+</section>
+
+<!-- Categories -->
+<div class="categories-strip">
+    <div class="strip-inner">
+        <span class="strip-label">Browse by topic →</span>
+        {% for cat in categories %}
+        <a href="/category/{{ cat }}" class="cat-pill">{{ cat }}</a>
+        {% endfor %}
+    </div>
+</div>
+
+<!-- Articles Grid -->
+<section class="articles-section">
+    <div class="section-header">
+        <h2 class="section-title">All Diary Entries</h2>
+        <p class="section-deco">everything I've learned, just for you ♡</p>
+    </div>
+    <div class="articles-grid">
+        {% for post in all_posts %}
+        <article class="article-card">
+            <div class="card-tag" style="border-color: {{ post.tag_color }}; color: {{ post.tag_color }}">
+                {{ post.category }}
+            </div>
+            <div class="card-icon">{{ post.hero_icon }}</div>
+            <h3 class="card-title">{{ post.title }}</h3>
+            <p class="card-excerpt">{{ post.excerpt }}</p>
+            <div class="card-footer">
+                <div class="card-meta">
+                    <span>{{ post.date }}</span>
+                    <span class="meta-dot">♡</span>
+                    <span>{{ post.read_time }}</span>
+                </div>
+                <a href="/post/{{ post.slug }}" class="card-link">Read → </a>
+            </div>
+        </article>
+        {% endfor %}
+    </div>
+</section>
+
+<!-- Stats Banner -->
+<section class="awareness-banner">
+    <div class="banner-inner">
+        <div class="banner-text">
+            <h2>Knowledge is the best protection. 🛡️</h2>
+            <p>Over 95% of successful cyberattacks start with human error. Understanding how threats work is the first — and most powerful — step to staying safe.</p>
+        </div>
+        <div class="banner-stats">
+            <div class="stat">
+                <span class="stat-num">3.4B</span>
+                <span class="stat-label">Phishing emails sent every single day</span>
+            </div>
+            <div class="stat">
+                <span class="stat-num">$9.5T</span>
+                <span class="stat-label">Global cybercrime cost in 2025</span>
+            </div>
+            <div class="stat">
+                <span class="stat-num">95%</span>
+                <span class="stat-label">Of breaches caused by human error</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

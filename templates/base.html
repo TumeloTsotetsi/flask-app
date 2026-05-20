@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}CyberDiary 🌸 — Cybersecurity, Simply Explained{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+</head>
+<body>
+    <header class="site-header">
+        <nav class="nav-inner">
+            <a href="/" class="logo">
+                <span class="logo-heart">🌸</span>
+                CyberDiary
+            </a>
+            <div class="nav-links">
+                <a href="/" class="nav-link">Home</a>
+                <a href="/category/Fundamentals" class="nav-link">Fundamentals</a>
+                <a href="/category/Threats" class="nav-link">Threats</a>
+                <a href="/category/Defense" class="nav-link">Defense</a>
+                <a href="/category/Privacy" class="nav-link">Privacy</a>
+            </div>
+            <span class="nav-deco">♡</span>
+        </nav>
+    </header>
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <div class="footer-brand">
+                🌸 CyberDiary
+                <p>Making cybersecurity cosy and accessible. No scary jargon — just clear, friendly explanations for everyone.</p>
+            </div>
+            <div class="footer-links">
+                <span class="footer-label">Topics 🔖</span>
+                <a href="/category/Fundamentals">Fundamentals</a>
+                <a href="/category/Threats">Threats</a>
+                <a href="/category/Defense">Defense</a>
+                <a href="/category/Privacy">Privacy</a>
+            </div>
+            <div class="footer-note">
+                <span class="footer-label">Our Mission 💌</span>
+                <p>Built to help everyday people understand the digital world — and how to stay safe in it, without feeling overwhelmed.</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span>© 2026 CyberDiary — made with love</span>
+            <span class="footer-hearts">♡ ♡ ♡</span>
+        </div>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

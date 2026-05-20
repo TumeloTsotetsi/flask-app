@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}404 — Page Not Found — CipherSense{% endblock %}
+{% block content %}
+<div class="error-page">
+    <div class="error-code">404</div>
+    <div class="error-terminal">
+        <div class="terminal-header">
+            <span class="t-dot red"></span><span class="t-dot yellow"></span><span class="t-dot green"></span>
+            <span class="t-title">error.log</span>
+        </div>
+        <div class="terminal-body">
+            <div class="t-line"><span class="t-prompt">$</span> <span class="t-cmd">locate --path "{{ request.path }}"</span></div>
+            <div class="t-line t-output">Searching filesystem...</div>
+            <div class="t-line t-output" style="color: #ff4d6d;">ERROR: Resource not found</div>
+            <div class="t-line t-output">Exit code: 404</div>
+            <div class="t-line"><span class="t-prompt">$</span> <span class="t-cursor">█</span></div>
+        </div>
+    </div>
+    <p>The page you're looking for doesn't exist or has been moved.</p>
+    <a href="/" class="btn-primary"><span>Return Home</span><span class="btn-arrow">→</span></a>
+</div>
+{% endblock %}

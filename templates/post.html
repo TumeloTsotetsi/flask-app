@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+{% block title %}{{ post.title }} — CyberDiary 🌸{% endblock %}
+
+{% block content %}
+<div class="post-layout">
+    <a href="/" class="back-link">← Back to all entries</a>
+
+    <header class="post-header">
+        <div class="post-tag" style="border-color: {{ post.tag_color }}; color: {{ post.tag_color }}">
+            <span class="tag-dot" style="background: {{ post.tag_color }}"></span>
+            {{ post.category }}
+        </div>
+        <div class="post-hero-icon">{{ post.hero_icon }}</div>
+        <h1 class="post-title">{{ post.title }}</h1>
+        <div class="post-meta">
+            <span>{{ post.date }}</span>
+            <span class="meta-sep">♡</span>
+            <span>{{ post.read_time }}</span>
+        </div>
+        <p class="post-lead">{{ post.excerpt }}</p>
+    </header>
+
+    <article class="post-body">
+        {% for section in post.content %}
+
+            {% if section.type == "intro" %}
+            <p class="content-intro">{{ section.text }}</p>
+
+            {% elif section.type == "heading" %}
+            <h2 class="content-heading">
+                <span class="heading-accent">✦</span> {{ section.text }}
+            </h2>
+
+            {% elif section.type == "paragraph" %}
+            <p class="content-paragraph">{{ section.text }}</p>
+
+            {% elif section.type == "analogy" %}
+            <div class="analogy-box">
+                <div class="analogy-header">
+                    <span class="analogy-icon">{{ section.icon }}</span>
+                    <span class="analogy-label">Analogy: {{ section.title }}</span>
+                </div>
+                <p>{{ section.text }}</p>
+            </div>
+
+            {% elif section.type == "comparison" %}
+            <div class="comparison-grid">
+                {% for item in section.entries %}
+                <div class="comparison-card">
+                    <div class="comp-icon">{{ item.icon }}</div>
+                    <h4>{{ item.name }}</h4>
+                    <p>{{ item.desc }}</p>
+                    <div class="comp-example">
+                        <span class="example-label">Example:</span> {{ item.example }}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+            {% elif section.type == "list" %}
+            <ul class="content-list">
+                {% for item in section.entries %}
+                <li>
+                    <span class="list-marker">♡</span>
+                    {{ item }}
+                </li>
+                {% endfor %}
+            </ul>
+
+            {% elif section.type == "takeaway" %}
+            <div class="takeaway-box">
+                <div class="takeaway-label">⭐ Key Takeaway</div>
+                <p>{{ section.text }}</p>
+            </div>
+
+            {% endif %}
+
+        {% endfor %}
+    </article>
+
+    {% if related %}
+    <section class="related-section">
+        <div class="section-header">
+            <h2 class="section-title">More on {{ post.category }} 🌸</h2>
+        </div>
+        <div class="related-grid">
+            {% for r in related %}
+            <a href="/post/{{ r.slug }}" class="related-card">
+                <div class="related-icon">{{ r.hero_icon }}</div>
+                <div class="related-info">
+                    <h3>{{ r.title }}</h3>
+                    <span>{{ r.read_time }}</span>
+                </div>
+                <span class="related-arrow">→</span>
+            </a>
+            {% endfor %}
+        </div>
+    </section>
+    {% endif %}
+</div>
+{% endblock %}
